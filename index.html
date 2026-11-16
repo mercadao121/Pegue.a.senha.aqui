@@ -77,6 +77,11 @@ h1 {
   line-height: 1.5;
 }
 
+.task a {
+  display: block;
+  text-decoration: none;
+}
+
 .task button {
   width: 100%;
   padding: 12px;
@@ -201,7 +206,7 @@ h1 {
   <h1>RISE SHOP 👑</h1>
 
   <p class="subtitle">
-    Complete as quatro etapas abaixo para liberar a senha do seu arquivo!
+    Complete as cinco etapas abaixo para liberar a senha do seu arquivo!
   </p>
 
   <!-- YOUTUBE -->
@@ -212,8 +217,7 @@ h1 {
     <p>Siga esse canal e comente alguma frase em algum vídeo!</p>
 
     <a href="https://youtube.com/@lucaio_oliveira?si=mGB4ueV9JaXrONh9"
-       target="_blank"
-       rel="noopener"
+       target="_blank" rel="noopener"
        onclick="completeTask(1, 5)">
       <button type="button">Acessar canal →</button>
     </a>
@@ -239,8 +243,7 @@ h1 {
     <p>Siga essa conta na Twitch!</p>
 
     <a href="https://www.twitch.com/lucaio_Oliveira"
-       target="_blank"
-       rel="noopener"
+       target="_blank" rel="noopener"
        onclick="completeTask(3, 5)">
       <button type="button">Acessar Twitch →</button>
     </a>
@@ -251,20 +254,33 @@ h1 {
     <span class="task-name">🎵 TikTok</span>
     <span class="status" id="status4">Pendente</span>
 
-    <p>Siga essa conta no TikTok!</p>
+    <p>Siga nossa conta do TikTok!</p>
 
     <a href="https://www.tiktok.com/@riseshop01"
-       target="_blank"
-       rel="noopener"
+       target="_blank" rel="noopener"
        onclick="completeTask(4, 5)">
       <button type="button">Acessar TikTok →</button>
+    </a>
+  </div>
+
+  <!-- INSTAGRAM -->
+  <div class="task">
+    <span class="task-name">📸 Instagram</span>
+    <span class="status" id="status5">Pendente</span>
+
+    <p>Siga essa conta no Instagram!</p>
+
+    <a href="https://www.instagram.com/lucaio_oliveira"
+       target="_blank" rel="noopener"
+       onclick="completeTask(5, 5)">
+      <button type="button">Acessar Instagram →</button>
     </a>
   </div>
 
   <!-- PROGRESSO -->
   <div class="progress-box">
     <strong>
-      Progresso: <span id="progressNumber">0/4</span>
+      Progresso: <span id="progressNumber">0/5</span>
     </strong>
 
     <div class="progress-bar">
@@ -296,8 +312,8 @@ h1 {
 <div id="toast"></div>
 
 <script>
-let completed = [false, false, false, false];
-let running = [false, false, false, false];
+let completed = [false, false, false, false, false];
+let running = [false, false, false, false, false];
 let toastTimer;
 
 function showToast(message) {
@@ -313,7 +329,7 @@ function showToast(message) {
   }, 3000);
 }
 
-// YOUTUBE, TWITCH E TIKTOK
+// YOUTUBE, TWITCH, TIKTOK E INSTAGRAM
 function completeTask(number, seconds) {
   let index = number - 1;
 
@@ -373,12 +389,12 @@ async function discordTask() {
 function updateProgress() {
   let total = completed.filter(Boolean).length;
 
-  document.getElementById("progressNumber").textContent = total + "/4";
+  document.getElementById("progressNumber").textContent = total + "/5";
 
   document.getElementById("progressFill").style.width =
-    (total / 4 * 100) + "%";
+    (total / 5 * 100) + "%";
 
-  if (total === 4) {
+  if (total === 5) {
     document.getElementById("unlock").style.display = "flex";
   }
 }
@@ -389,9 +405,7 @@ async function copyPassword() {
 
   try {
     await navigator.clipboard.writeText(password);
-
     showToast("✓ Senha copiada!");
-
   } catch (error) {
     window.prompt("Copie sua senha:", password);
   }
