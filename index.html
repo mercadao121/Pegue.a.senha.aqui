@@ -1,0 +1,402 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RISE SHOP - Liberar Senha</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  padding: 25px 15px;
+  font-family: Arial, sans-serif;
+  color: white;
+  background: radial-gradient(circle at top, #164d2b, #07140c 70%);
+}
+
+.container {
+  width: 100%;
+  max-width: 480px;
+  margin: auto;
+  text-align: center;
+}
+
+.logo {
+  width: 100%;
+  max-width: 320px;
+  height: auto;
+  object-fit: contain;
+  border-radius: 12px;
+  margin-bottom: 12px;
+}
+
+h1 {
+  margin: 10px 0;
+  color: #72ff91;
+}
+
+.subtitle {
+  color: #c5d8ca;
+  line-height: 1.5;
+  margin-bottom: 25px;
+}
+
+.task {
+  background: #102719;
+  border: 1px solid #28623b;
+  border-radius: 13px;
+  padding: 17px;
+  margin-bottom: 14px;
+  text-align: left;
+}
+
+.task-name {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.status {
+  float: right;
+  color: #ffcf68;
+  font-size: 12px;
+}
+
+.status.done {
+  color: #72ff91;
+}
+
+.task p {
+  color: #c5d8ca;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.task button {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background: #65e982;
+  color: #07140c;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.task button:hover {
+  background: #8aff9f;
+}
+
+.progress-box {
+  margin-top: 22px;
+  padding: 17px;
+  background: #102719;
+  border-radius: 12px;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 10px;
+  background: #263d2d;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-top: 12px;
+}
+
+.progress-fill {
+  width: 0%;
+  height: 100%;
+  background: #65e982;
+  transition: width 0.4s;
+}
+
+#unlock {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.94);
+  z-index: 10;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.unlock-content {
+  width: 100%;
+  max-width: 380px;
+  background: #102719;
+  border: 1px solid #65e982;
+  border-radius: 17px;
+  padding: 30px 20px;
+  text-align: center;
+}
+
+.unlock-content h2 {
+  color: #72ff91;
+}
+
+.password {
+  padding: 16px;
+  background: #07140c;
+  border: 1px dashed #65e982;
+  border-radius: 9px;
+  font-size: 25px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  margin: 20px 0;
+}
+
+.unlock-content button {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
+  background: #65e982;
+  color: #07140c;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#toast {
+  visibility: hidden;
+  opacity: 0;
+  position: fixed;
+  bottom: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #65e982;
+  color: #07140c;
+  padding: 13px 18px;
+  border-radius: 9px;
+  font-weight: bold;
+  font-size: 13px;
+  text-align: center;
+  width: max-content;
+  max-width: 90%;
+  transition: opacity 0.3s;
+  z-index: 20;
+}
+
+#toast.show {
+  visibility: visible;
+  opacity: 1;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <img class="logo"
+  src="https://media.discordapp.net/attachments/1564399030975467570/1566951056641106163/image.png?ex=6afc34a4&is=6afae324&hm=6c89e80f4dd694ee92c4369c279ed49d4326be8b9cb54083d6dcbd435837798c&format=webp&quality=lossless&width=640&height=240"
+  alt="RISE SHOP">
+
+  <h1>RISE SHOP 👑</h1>
+
+  <p class="subtitle">
+    Complete as quatro etapas abaixo para liberar a senha do seu arquivo!
+  </p>
+
+  <!-- YOUTUBE -->
+  <div class="task">
+    <span class="task-name">▶ YouTube</span>
+    <span class="status" id="status1">Pendente</span>
+
+    <p>Siga esse canal e comente alguma frase em algum vídeo!</p>
+
+    <a href="https://youtube.com/@lucaio_oliveira?si=mGB4ueV9JaXrONh9"
+       target="_blank"
+       rel="noopener"
+       onclick="completeTask(1, 5)">
+      <button type="button">Acessar canal →</button>
+    </a>
+  </div>
+
+  <!-- DISCORD -->
+  <div class="task">
+    <span class="task-name">💬 Discord</span>
+    <span class="status" id="status2">Pendente</span>
+
+    <p>Compartilhe nosso convite com algum amigo! Copie o link e envie para alguém em qualquer lugar.</p>
+
+    <button type="button" onclick="discordTask()">
+      📋 Copiar convite →
+    </button>
+  </div>
+
+  <!-- TWITCH -->
+  <div class="task">
+    <span class="task-name">🟣 Twitch</span>
+    <span class="status" id="status3">Pendente</span>
+
+    <p>Siga essa conta na Twitch!</p>
+
+    <a href="https://www.twitch.com/lucaio_Oliveira"
+       target="_blank"
+       rel="noopener"
+       onclick="completeTask(3, 5)">
+      <button type="button">Acessar Twitch →</button>
+    </a>
+  </div>
+
+  <!-- TIKTOK -->
+  <div class="task">
+    <span class="task-name">🎵 TikTok</span>
+    <span class="status" id="status4">Pendente</span>
+
+    <p>Siga essa conta no TikTok!</p>
+
+    <a href="https://www.tiktok.com/@riseshop01"
+       target="_blank"
+       rel="noopener"
+       onclick="completeTask(4, 5)">
+      <button type="button">Acessar TikTok →</button>
+    </a>
+  </div>
+
+  <!-- PROGRESSO -->
+  <div class="progress-box">
+    <strong>
+      Progresso: <span id="progressNumber">0/4</span>
+    </strong>
+
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- SENHA LIBERADA -->
+<div id="unlock">
+  <div class="unlock-content">
+
+    <div style="font-size:45px;">🎉</div>
+
+    <h2>SENHA LIBERADA!</h2>
+
+    <p>Você completou todas as etapas. Aqui está sua senha:</p>
+
+    <div class="password">boss350</div>
+
+    <button type="button" onclick="copyPassword()">
+      📋 COPIAR SENHA
+    </button>
+
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+let completed = [false, false, false, false];
+let running = [false, false, false, false];
+let toastTimer;
+
+function showToast(message) {
+  const toast = document.getElementById("toast");
+
+  toast.textContent = message;
+  toast.classList.add("show");
+
+  clearTimeout(toastTimer);
+
+  toastTimer = setTimeout(function() {
+    toast.classList.remove("show");
+  }, 3000);
+}
+
+// YOUTUBE, TWITCH E TIKTOK
+function completeTask(number, seconds) {
+  let index = number - 1;
+
+  if (completed[index] || running[index]) return;
+
+  running[index] = true;
+
+  const status = document.getElementById("status" + number);
+
+  status.textContent = "Carregando...";
+  status.classList.remove("done");
+
+  setTimeout(function() {
+    completed[index] = true;
+    running[index] = false;
+
+    status.textContent = "✓ Concluído";
+    status.classList.add("done");
+
+    updateProgress();
+  }, seconds * 1000);
+}
+
+// DISCORD
+async function discordTask() {
+  const discordLink = "https://discord.gg/rxYgAyEpKu";
+
+  try {
+    await navigator.clipboard.writeText(discordLink);
+
+    showToast("✓ Link copiado! Envie para algum amigo em qualquer lugar.");
+
+  } catch (error) {
+    window.prompt("Copie o convite e envie para algum amigo:", discordLink);
+  }
+
+  if (completed[1] || running[1]) return;
+
+  running[1] = true;
+
+  const status = document.getElementById("status2");
+  status.textContent = "Carregando...";
+  status.classList.remove("done");
+
+  setTimeout(function() {
+    completed[1] = true;
+    running[1] = false;
+
+    status.textContent = "✓ Concluído";
+    status.classList.add("done");
+
+    updateProgress();
+  }, 10000);
+}
+
+// ATUALIZAR PROGRESSO
+function updateProgress() {
+  let total = completed.filter(Boolean).length;
+
+  document.getElementById("progressNumber").textContent = total + "/4";
+
+  document.getElementById("progressFill").style.width =
+    (total / 4 * 100) + "%";
+
+  if (total === 4) {
+    document.getElementById("unlock").style.display = "flex";
+  }
+}
+
+// COPIAR SENHA
+async function copyPassword() {
+  const password = "boss350";
+
+  try {
+    await navigator.clipboard.writeText(password);
+
+    showToast("✓ Senha copiada!");
+
+  } catch (error) {
+    window.prompt("Copie sua senha:", password);
+  }
+}
+</script>
+
+</body>
+</html>
